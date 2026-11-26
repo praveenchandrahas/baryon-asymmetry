@@ -39,6 +39,7 @@ cosmological parameters and later MeV-band data. See
 * `src/bau/diagnostics.py`, `similarity.py` – attempts to explain the gap; see
   [docs/diagnostics.md](docs/diagnostics.md)
 * [docs/index.html](docs/index.html) – a plain-language explainer
+  ([web page](https://praveenchandrahas.github.io/baryon-asymmetry/))
 
 ## Run
 
