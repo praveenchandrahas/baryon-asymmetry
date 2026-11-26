@@ -150,7 +150,13 @@ BODY = f"""
 <h3>Could many of the galaxies we see be antimatter?</h3>
 <p>Their light would not tell us, because antimatter atoms should shine just like ordinary ones. Their borders would. Gas between and inside <a href="https://arxiv.org/abs/0808.1122">clusters of galaxies shows no sign of annihilation</a>, and our comparison counts against large touching regions. So a large number of antimatter galaxies looks very unlikely. A rare, well-isolated one is not ruled out.</p>
 <h3>Could something have kept the two apart?</h3>
-<p>This is the natural escape. But the early universe was filled with gas almost perfectly evenly, so there were no empty gaps. Something else would be needed, and we have no candidate. If we find one, we will write down what would rule it out before simulating it.</p>
+<p>This is the natural escape. But the early universe was filled with gas almost perfectly evenly, so there were no empty gaps. Something else would be needed, and we have no working candidate. If we find one, we will write down what would rule it out before simulating it.</p>
+<p><strong>Log, 26 November 2026: could the first annihilations have pushed the two apart?</strong> We thought of this too: the radiation released when matter and antimatter first destroyed each other might have pushed the survivors into separate regions. <a href="https://arxiv.org/abs/astro-ph/9705045">Early attempts along these lines</a>, by Roland Omnès, did not succeed. Our own reasoning, which we have not simulated, says the same:</p>
+<ul>
+<li>Light pushes matter and antimatter alike, so it cannot sort an even mixture.</li>
+<li>By the time it matters, the annihilations add very little to the radiation already there: our rough estimate is about 2 parts in 100 million at a temperature of 40 MeV (roughly 500 billion degrees).</li>
+<li>A push through gas travels at the speed of sound. Until the cosmic microwave background was released, sound had covered only about 500 million light-years (at today's scale). That is too small to escape the gamma-ray test.</li>
+</ul>
 <h3>Could there be a few antimatter stars?</h3>
 <p>A 2021 study flagged <a href="https://arxiv.org/abs/2103.10073">14 gamma-ray sources as possible antistars</a>. None is confirmed. A few would not solve the puzzle.</p>
 <h3>Could the antimatter be hiding as dark matter?</h3>

@@ -65,6 +65,7 @@ Items marked **speculation** have not been tested by this project.
 - Most useful next step: an outside expert check, especially of the heating assumption.
 
 ## Candidate 1: radiation pressure from the early annihilations (judged not to work)
+Logged 26 November 2026.
 Proposed by Praveen. Close to Omnes's idea (1969-71), reviewed as unsuccessful
 (De Rujula, astro-ph/9705045; Dolgov, hep-ph/0211260). Our assessment is an argument
 and an order-of-magnitude estimate, **not a simulation**:
