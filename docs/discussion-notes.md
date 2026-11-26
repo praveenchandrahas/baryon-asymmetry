@@ -74,3 +74,8 @@ and an order-of-magnitude estimate, **not a simulation**:
   3e-3 at 100 MeV, 2e-8 at 40 MeV, 4e-16 at 22 MeV.
 - Pressure cannot move gas beyond the sound horizon (about 150 Mpc comoving at
   recombination). Domains of that size are inside the range counted against.
+
+## Closed for now (26 November 2026)
+Praveen's conclusion: the hypothesis, as he hoped it would work, does not. Further
+alternatives are largely for experts. Open: horizon-sized domains, small pockets,
+dark-matter nuggets (untested), heating assumption, the gap with the 1998 rate.

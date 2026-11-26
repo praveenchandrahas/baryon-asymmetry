@@ -21,6 +21,12 @@ It is split into three claims, because they fail or survive separately:
 | H2 | Large separated domains produced by some mechanism (new physics) | Gamma rays exclude domains much smaller than the visible universe (Cohen, De Rújula, Glashow 1998) |
 | H3 | Small, distant antimatter pockets exist | Can be bounded; would not by itself explain the asymmetry |
 
+## Status
+
+Closed for now (26 November 2026). Simple random survival fails; large domains are
+excluded for the sizes tested, within one unchecked model. Horizon-sized domains,
+small pockets and the reproduction gap remain open.
+
 ## Latest result
 
 With current cosmology, even the lowest gamma-ray flux from our runs is 52 times
