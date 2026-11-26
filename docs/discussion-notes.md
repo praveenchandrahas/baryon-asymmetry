@@ -63,3 +63,13 @@ Items marked **speculation** have not been tested by this project.
   conclusion. Whether it is new enough to publish is for an expert reviewer.
 - First-time arXiv authors need a personal endorsement or prior co-authorship.
 - Most useful next step: an outside expert check, especially of the heating assumption.
+
+## Candidate 1: radiation pressure from the early annihilations (judged not to work)
+Proposed by Praveen. Close to Omnes's idea (1969-71), reviewed as unsuccessful
+(De Rujula, astro-ph/9705045; Dolgov, hep-ph/0211260). Our assessment is an argument
+and an order-of-magnitude estimate, **not a simulation**:
+- Light pushes matter and antimatter alike, so it cannot sort an even mixture.
+- Equilibrium estimate of nucleon+antinucleon energy / radiation energy (g*=14.25):
+  3e-3 at 100 MeV, 2e-8 at 40 MeV, 4e-16 at 22 MeV.
+- Pressure cannot move gas beyond the sound horizon (about 150 Mpc comoving at
+  recombination). Domains of that size are inside the range counted against.
