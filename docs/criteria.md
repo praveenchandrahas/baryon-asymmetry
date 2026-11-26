@@ -47,8 +47,8 @@ are fixed and committed before R is computed.
 | R < 1 | not excluded |
 | 1 ≤ R ≤ 3 | inconclusive |
 
-The margin of 3 allows for modelling uncertainty (CDG quote about a factor of 2
-from parameter choices). Because Φ ∝ 1/d₀, the excluded range is
+The margin of 3 allows for modelling uncertainty (CDG: other cosmologies lower
+the flux by at most about 2; a shorter electron range by at most about 3). Because Φ ∝ 1/d₀, the excluded range is
 d₀ < d_excl = d₀·R(d₀)/3.
 
 * d_excl ≥ 1000 Mpc: the 1998 conclusion is confirmed.
@@ -70,4 +70,13 @@ A p p̄ annihilation at rest releases 1877 MeV, so no photon exceeds about
 
 ## Amendments
 
-None.
+26 November 2026, after reading the paper itself and **after seeing the G1a
+result**:
+
+1. G1 is split. **G1a**: the flux integral using CDG's own J(y), taken from
+   their Figure 3. **G1b**: computing J(y) ourselves from their eqs. 1–3 and
+   reproducing Figure 3. G1 passes only if both do. G1b is needed because J
+   depends on cosmology, so G2 cannot be run without it.
+2. The reason for G3's margin was misstated. CDG say other cosmologies cannot
+   *lower* the flux by more than about 2; they put no such limit on increases.
+   The thresholds are unchanged. No G3 quantity has been computed.
