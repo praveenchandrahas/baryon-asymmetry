@@ -23,3 +23,11 @@ for pick, (name, d0) in enumerate((("upper", 20), ("lower", 1000))):
         f.write(HEAD.format(f"Fig. 5 {name} curve (labelled d0={d0} Mpc)") + "E_MeV,flux_per_cm2_s_MeV_sr\n")
         for x, top in sorted(set(pts)):
             f.write(f"{10**((x-247.015)/(380.185-247.015)):.5g},{10**(-(top-132.465)/((349.425-132.465)/6)):.5g}\n")
+
+# Fig. 2 (page 12): ticks y=1 at x=172.87, 93.62 pt per decade; T=1 eV at top=207.57, 51.31 pt per decade
+c = [c for c in pdf.pages[11].curves if c["stroking_color"] == (0, 0, 0) and c["x1"] - c["x0"] > 50]
+assert len(c) == 1
+with open(f"{out}/cdg_fig2_T.csv", "w") as f:
+    f.write(HEAD.format("Fig. 2 electron-heating curve") + "y,T_eV\n")
+    for x, top in sorted(set(c[0]["pts"])):
+        f.write(f"{10**((x-172.87)/93.62):.5g},{10**((207.57-top)/51.31):.5g}\n")
