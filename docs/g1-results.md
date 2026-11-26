@@ -50,15 +50,14 @@ closer, but it was not the judged run and also misses at y = 20 and 25.
 * Driven by CDG's J, our heating and cooling terms reproduce their Figure 2
   temperature to 1-3 %.
 
-### Where the difference lies (not yet explained)
+### Where the difference lies (not settled)
 
 The heating and cooling match, so the difference is in the relation between J
 and temperature. At y = 40-100 their J is 0.97-0.98 of (3/4)^4 n c_s (p = nT);
-ours is about 0.7. Because heating is proportional to J, a lower coefficient
-also lowers the temperature, which lowers J further. Candidates, none tested:
-the spatial profile of the heating, their boundary treatment, their numerical
-resolution, or an error on our side shared by both solvers (they share the
-equations and source terms).
+ours is about 0.7. Diagnostics run afterwards ([diagnostics.md](diagnostics.md))
+changed the heating profile, wall speed, Hubble drag and grid one at a time.
+**None accounts for the gap.** A semi-analytic solution of a simplified case
+supports the lower coefficient, with limits described there.
 
 ### Two points about the paper
 

@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from scipy.integrate import solve_ivp
 
-from bau import flux, fluid, godunov
+from bau import flux, fluid, godunov, similarity
 
 
 @pytest.mark.parametrize("kappa", [1, 2])
@@ -42,3 +42,19 @@ def test_independent_solvers_agree():
     for yy, (j, _) in other.items():
         main = np.exp(np.interp(np.log(yy), np.log(y[::-1]), np.log(J[::-1])))
         assert j == pytest.approx(main, rel=0.03)
+
+
+@pytest.mark.parametrize("speed", [0.775, 1.0, 2.0])
+def test_static_isothermal_flux(speed):
+    """Nearly isothermal flow into vacuum gives n c_iso / e, whatever outflow
+    speed is imposed at the wall."""
+    r = fluid.isothermal_test(boundary_speed=speed)
+    assert r == pytest.approx(1, abs=0.02)
+
+
+def test_expanding_flow_against_similarity_solution():
+    """Solver and semi-analytic isothermal solution, with expansion and a
+    rising sound speed. The thermostat in the solver leaves a few per cent."""
+    coefficient, u_wall = similarity.flux_coefficient(0.5)
+    assert u_wall == pytest.approx(-1, abs=0.02)
+    assert fluid.expanding_test(0.5) == pytest.approx(coefficient, rel=0.08)
