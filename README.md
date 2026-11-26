@@ -36,6 +36,9 @@ cosmological parameters and later MeV-band data. See
   [docs/g1-results.md](docs/g1-results.md)
 * `src/bau/fluid.py`, `godunov.py` – our own J(y). **It does not reproduce
   theirs within the preset tolerance**, so there is no updated bound
+* `src/bau/diagnostics.py`, `similarity.py` – attempts to explain the gap; see
+  [docs/diagnostics.md](docs/diagnostics.md)
+* [docs/index.html](docs/index.html) – a plain-language explainer
 
 ## Run
 
@@ -45,4 +48,5 @@ python -m pytest
 PYTHONPATH=src python -m bau.relic
 PYTHONPATH=src python -m bau.g1
 PYTHONPATH=src python -m bau.g1b
+PYTHONPATH=src python -m bau.diagnostics
 ```

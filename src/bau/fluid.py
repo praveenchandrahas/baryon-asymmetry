@@ -26,12 +26,17 @@ class Flow:
     def __init__(self, kappa=1.0, eta=2e-10, h=0.75, omega_m=1.0, omega_l=0.0,
                  a_ev_mpc=10.0, heating=True, drag=True, compton=True,
                  expansion=True, cells=150, x_first=3e18, x_max=1e24,
-                 viscosity=1.0):
+                 viscosity=1.0, heat_profile="local", boundary_speed=1.0,
+                 hubble_drag=True, relax_rate=0.0, relax_T=1.0):
         self.kappa, self.n0 = kappa, eta * N_GAMMA0
         self.h, self.om, self.ol = h, omega_m, omega_l
         self.a = a_ev_mpc if heating else 0.0
         self.drag, self.compton, self.expansion = drag, compton, expansion
         self.viscosity = viscosity
+        # diagnostic switches (docs/diagnostics.md); defaults are the baseline
+        self.heat_profile, self.boundary_speed = heat_profile, boundary_speed
+        self.hubble_drag = hubble_drag
+        self.relax_rate, self.relax_T = relax_rate, relax_T
         ratio = self._ratio(cells, x_first, x_max)
         self.dx = x_first * ratio ** np.arange(cells)
         self.centres = np.cumsum(self.dx) - 0.5 * self.dx
@@ -62,7 +67,8 @@ class Flow:
     def J(self, y, s):
         """Annihilations per cm^2 per s (one interface)."""
         lnN, T = s[0], s[1]
-        return self.n0 * y**3 * np.exp(lnN) * self.sound_speed(T)
+        return (self.n0 * y**3 * np.exp(lnN) * self.boundary_speed
+                * self.sound_speed(T))
 
     def rhs(self, y, s):
         """Time derivative in physical time (per second) at redshift y."""
@@ -75,7 +81,7 @@ class Flow:
         N = np.exp(lnN)
 
         v = np.empty(M + 1)
-        v[0] = -self.sound_speed(T[0])
+        v[0] = -self.boundary_speed * self.sound_speed(T[0])
         v[1:] = v_r
         v[M] = 0.0                                  # undisturbed far field
 
@@ -94,8 +100,12 @@ class Flow:
         right = np.concatenate((grad, [0.0]))
         advect = y * v_c * np.where(v_c > 0, left, right)
         heat = G_BAR * self.J(y, s) * self.a / (6 * self.n0 * MPC_CM)
+        if self.heat_profile == "uniform":
+            heat = heat / np.maximum(N, 0.1)
         dT = (-2 * H * T - advect - 2 / 3 * T * div
-              + k_c * (T_GAMMA0 * y - T) + heat)
+              + k_c * (T_GAMMA0 * y - T) + heat
+              + self.relax_rate * ((self.relax_T(y) if callable(self.relax_T)
+                                    else self.relax_T) - T))
 
         # momentum at interior edges
         face = 0.5 * (dx[:-1] + dx[1:])
@@ -111,7 +121,7 @@ class Flow:
         gr = np.diff(v)[1:] / dx[1:]
         adv_v = y * vi * np.where(vi > 0, gl, gr)
         dv = np.zeros(M)
-        dv[:-1] = force - adv_v - (H + nu) * vi
+        dv[:-1] = force - adv_v - (H * self.hubble_drag + nu) * vi
 
         out = np.empty_like(s)
         out[0::3], out[1::3], out[2::3] = dlnN, dT, dv
@@ -172,3 +182,41 @@ def diffusion_test(cells=150, y_start=6000.0, y_check=1000.0, kappa=1.0):
     nu = 4 / 3 * SIGMA_T * U_GAMMA0 * yy**4 * C / M_P
     D = kappa * T_GAMMA0 * yy / M_P * C**2 / nu
     return J[-1] / (flow.n0 * yy**3 * np.sqrt(5 * D / (3 * np.pi * t)))
+
+
+def isothermal_test(cells=200, T=1.0, kappa=1.0, boundary_speed=1.0):
+    """Static, strongly thermostatted flow into vacuum; J / (n c_iso / e)."""
+    c_iso = C * np.sqrt(kappa * T / M_P)
+    t_end = 1e21 / c_iso
+    flow = Flow(kappa=kappa, heating=False, drag=False, compton=False,
+                expansion=False, cells=cells, x_first=1e17, x_max=1e22,
+                relax_rate=1000 / t_end, relax_T=T,
+                boundary_speed=boundary_speed)
+    s0 = flow.initial(1.0)
+    s0[1::3] = T
+    sol = solve_ivp(lambda t, s: flow.rhs(1.0, s), (0, t_end), s0, method="BDF",
+                    rtol=1e-6, atol=np.tile([1e-7, 1e-8, 1.0], cells),
+                    jac_sparsity=flow.sparsity())
+    return flow.J(1.0, sol.y[:, -1]) / (flow.n0 * c_iso / np.e)
+
+
+def expanding_test(b, cells=300, y_start=4000.0, y_end=40.0, kappa=1.0):
+    """Thermostatted flow with sound speed ~ t^b, expansion on; J / (n c_iso)."""
+    def T_of_y(y):                       # c ~ t^b and t ~ y^(-3/2)
+        return 1.0 * (y_end / y) ** (3 * b)
+
+    flow = Flow(kappa=kappa, heating=False, drag=False, compton=False,
+                cells=cells, x_first=3e17 * 300 / cells, x_max=1e25, relax_T=T_of_y)
+
+    def f(tau, s):
+        y = np.exp(-tau)
+        flow.relax_rate = 300 * flow.hubble(y)
+        return flow.rhs(y, s) / flow.hubble(y)
+
+    s0 = flow.initial(y_start)
+    s0[1::3] = T_of_y(y_start)
+    sol = solve_ivp(f, (-np.log(y_start), -np.log(y_end)), s0, method="BDF",
+                    rtol=1e-6, atol=np.tile([1e-7, 1e-9, 1.0], cells),
+                    jac_sparsity=flow.sparsity())
+    c_iso = C * np.sqrt(kappa * sol.y[1, -1] / M_P)
+    return flow.J(y_end, sol.y[:, -1]) / (flow.n0 * y_end**3 * c_iso)
