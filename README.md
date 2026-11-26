@@ -34,7 +34,8 @@ cosmological parameters and later MeV-band data. See
 * `tests/` – checks, run by GitHub Actions
 * `src/bau/flux.py` – the CDG flux integral, using their published J(y); see
   [docs/g1-results.md](docs/g1-results.md)
-* Computing J(y) ourselves is **not done yet**, so there is no updated bound
+* `src/bau/fluid.py`, `godunov.py` – our own J(y). **It does not reproduce
+  theirs within the preset tolerance**, so there is no updated bound
 
 ## Run
 
@@ -43,4 +44,5 @@ python -m pip install -r requirements.txt
 python -m pytest
 PYTHONPATH=src python -m bau.relic
 PYTHONPATH=src python -m bau.g1
+PYTHONPATH=src python -m bau.g1b
 ```

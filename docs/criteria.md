@@ -80,3 +80,27 @@ result**:
 2. The reason for G3's margin was misstated. CDG say other cosmologies cannot
    *lower* the flux by more than about 2; they put no such limit on increases.
    The thresholds are unchanged. No G3 quantity has been computed.
+
+## G1b criterion (set 26 November 2026, before any J(y) was computed here)
+
+The published figures had been seen and compared with CDG's own formulas; no
+solver output existed.
+
+**Pass:** our self-consistent J(y) is within a factor of 1.5 of CDG Figure 3
+(solid curve) at y = 20, 25, 40, 100, 200, 400 and 1000, and halving the grid
+spacing changes it by less than 5 %.
+
+**Solver checks required first:** flux into vacuum = (3/4)⁴ n c_s to 2 %; the
+strong-drag limit reproduces CDG eq. 7 to 5 %.
+
+**Pressure convention, fixed in advance.** CDG define T = p/(n_p + n_e), which
+gives p = 2nT. Their eqs. 6 and 8, the Compton term in eq. 3 and the dashed
+curve of Figure 3 instead correspond to p = nT. Their temperature figure
+corresponds to a heat capacity of both species (3nT per proton).
+
+* Judged run: pressure p = nT in the momentum equation (what their formulas
+  use), heat capacity 3nT.
+* Also reported: p = 2nT, which we believe is physically correct.
+
+Other choices: electron heating only, a = 10 eV/Mpc (their value), UV heating
+neglected, annihilation treated as a perfectly absorbing boundary.
