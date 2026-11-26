@@ -104,3 +104,49 @@ corresponds to a heat capacity of both species (3nT per proton).
 
 Other choices: electron heating only, a = 10 eV/Mpc (their value), UV heating
 neglected, annihilation treated as a perfectly absorbing boundary.
+
+3. 26 November 2026, **after G1b had failed**: a conservative comparison with
+   data is run although the "no updated bound until explained" rule of G1 is not
+   met. See below. This changes a rule after seeing a failure.
+
+## Conservative comparison (set 26 November 2026, before any modern-cosmology J or flux was computed here)
+
+Approved by the project owner. **Not blind**: G1 results were known, CDG's
+Figure 5 already shows their prediction against preliminary COMPTEL data, and we
+had recorded an expectation that modern inputs raise the flux.
+
+**Question.** With current cosmology, is even the lowest flux we have too bright?
+
+**Annihilation rate.** At each y, the smallest J among:
+
+* our solver in all nine variants of `diagnostics.md` (baseline, H1, H2, B1-B3,
+  E1, N1, N2), for both pressure conventions; and
+* CDG's Figure 3 J multiplied by (our modern J / our 1998 J) for each of those 18.
+  Applying our ratio to their curve is an assumption.
+
+**Cosmology.** h = 0.6736, Omega_m = 0.3153, flat, radiation density
+Omega_r h^2 = 4.18e-5, eta = 6.12e-10 (Planck 2018). The electron energy loss
+a y^3 is proportional to electron density (CDG eq. 30), so a is multiplied by
+eta/2e-10. Annihilation counted for 20 < y < 1100 only. Helium is ignored.
+
+**Photon spectrum.** At each energy, the smallest flux among k = 1, 2, 3.
+
+**Data.** COMPTEL cosmic diffuse background, power-law fit from S. C. Kappadath,
+PhD thesis (University of New Hampshire, 1998), abstract:
+(1.05 +- 0.2) x 10^-4 (E/5 MeV)^(-2.4 +- 0.2) photons / (cm^2 s sr MeV).
+Phi_obs + 2 sigma is taken generously: normalisation 1.45e-4, and at each energy
+the more favourable of index -2.8 and -2.0. This replaces the Weidenspointner
+et al. (2000) bins named earlier, whose values we could not retrieve. Nothing is
+subtracted for other sources.
+
+**Statistic.** R(d0) = max over 2, 3, 5, 7, 10 MeV of Phi_pred / (Phi_obs + 2 sigma),
+for d0 = 20 and 1000 Mpc; d_excl = d0 R / 3.
+
+**Verdict** (thresholds as in G3): R > 3 excluded; R < 1 or 1 <= R <= 3:
+**inconclusive** until the G1b gap is settled (a lowest-case flux below the data
+cannot show that a domain size is allowed). d_excl >= 1000 Mpc: the 1998
+conclusion survives this test.
+
+**What a pass would not show.** The smallest of our runs is not a proven lower
+limit: the runs share assumptions (CDG's fluid model, one dimension, complete
+ionisation, no magnetic fields, domains in contact).
