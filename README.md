@@ -32,7 +32,9 @@ cosmological parameters and later MeV-band data. See
 * `src/bau/relic.py` – freeze-out with zero net baryon number (H1 baseline)
 * `src/bau/kinematics.py` – highest photon energy the CDG signal can have today
 * `tests/` – checks, run by GitHub Actions
-* The CDG flux calculation is **not implemented yet**
+* `src/bau/flux.py` – the CDG flux integral, using their published J(y); see
+  [docs/g1-results.md](docs/g1-results.md)
+* Computing J(y) ourselves is **not done yet**, so there is no updated bound
 
 ## Run
 
@@ -40,4 +42,5 @@ cosmological parameters and later MeV-band data. See
 python -m pip install -r requirements.txt
 python -m pytest
 PYTHONPATH=src python -m bau.relic
+PYTHONPATH=src python -m bau.g1
 ```
