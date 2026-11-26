@@ -21,6 +21,13 @@ It is split into three claims, because they fail or survive separately:
 | H2 | Large separated domains produced by some mechanism (new physics) | Gamma rays exclude domains much smaller than the visible universe (Cohen, De Rújula, Glashow 1998) |
 | H3 | Small, distant antimatter pockets exist | Can be bounded; would not by itself explain the asymmetry |
 
+## Latest result
+
+With current cosmology, even the lowest gamma-ray flux from our runs is 52 times
+above the data for 1000 Mpc domains, so **domains up to that size are excluded**
+within the Cohen–De Rújula–Glashow model. This counts against the hypothesis.
+See [docs/conservative-result.md](docs/conservative-result.md) and its limits.
+
 ## First target
 
 Redo the Cohen–De Rújula–Glashow (CDG) diffuse gamma-ray bound with current
@@ -35,7 +42,7 @@ cosmological parameters and later MeV-band data. See
 * `src/bau/flux.py` – the CDG flux integral, using their published J(y); see
   [docs/g1-results.md](docs/g1-results.md)
 * `src/bau/fluid.py`, `godunov.py` – our own J(y). **It does not reproduce
-  theirs within the preset tolerance**, so there is no updated bound
+  theirs within the preset tolerance**
 * `src/bau/diagnostics.py`, `similarity.py` – attempts to explain the gap; see
   [docs/diagnostics.md](docs/diagnostics.md)
 * [docs/index.html](docs/index.html) – a plain-language explainer
@@ -50,4 +57,5 @@ PYTHONPATH=src python -m bau.relic
 PYTHONPATH=src python -m bau.g1
 PYTHONPATH=src python -m bau.g1b
 PYTHONPATH=src python -m bau.diagnostics
+PYTHONPATH=src python -m bau.conservative
 ```

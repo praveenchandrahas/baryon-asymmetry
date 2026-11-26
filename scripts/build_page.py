@@ -75,7 +75,7 @@ BODY = f"""
 <main>
 <h1>Where did the antimatter go?</h1>
 <p class="lede">The universe should have destroyed almost all of its matter. It did not. This page explains the puzzle, one old idea for solving it, and what our computer simulations have and have not shown so far.</p>
-<div class="note"><strong>The short answer.</strong> We have not solved the puzzle. The idea we are testing has strong published evidence against it. Our own check of the most important piece of that evidence is only half complete.</div>
+<div class="note"><strong>The short answer.</strong> We have not solved the puzzle. With current numbers for the universe, our calculation counts strongly against the idea we are testing: the separate regions it needs would produce far more gamma rays than are seen.</div>
 
 <h2>The puzzle</h2>
 <p>Every kind of matter particle has a mirror twin, an antiparticle, with the opposite charge. When a proton meets an antiproton, both are destroyed and their mass turns into lighter particles and radiation. This is called <em>annihilation</em>.</p>
@@ -90,7 +90,7 @@ BODY = f"""
 <div class="scroll"><table>
 <tr><th>Version</th><th>What it claims</th><th>Where it stands</th></tr>
 <tr><td>Luck alone</td><td>Random unevenness, with no new physics, left enough survivors.</td><td>Our first estimate says no, by a wide margin.</td></tr>
-<tr><td>Large separate regions</td><td>Something not yet known pushed matter and antimatter far apart.</td><td>A 1998 study says the regions would have to be about as large as everything we can see. This is what we are checking.</td></tr>
+<tr><td>Large separate regions</td><td>Something not yet known pushed matter and antimatter far apart.</td><td>A 1998 study says the regions would have to be about as large as everything we can see. Our updated comparison agrees as far as we tested it.</td></tr>
 <tr><td>Small pockets</td><td>A few antimatter pockets exist far away.</td><td>Not tested here. Even if true, they would not explain the puzzle.</td></tr>
 </table></div>
 
@@ -106,7 +106,7 @@ BODY = f"""
 <h2>The test that matters: gamma rays</h2>
 <p>If matter and antimatter regions exist, they must touch somewhere, unless something empties the space between them. Along each border, annihilation would produce gamma rays, a very energetic form of light. Those rays would still be arriving today as a faint glow across the whole sky.</p>
 <p>In 1998 Andrew Cohen, Álvaro De Rújula and Sheldon Glashow calculated that glow. They concluded it would be brighter than what telescopes see unless our matter region is about as large as the visible universe.</p>
-<p>Their calculation used the picture of the universe accepted then. We now know it differently, for example that its expansion is speeding up. So we planned to redo it with current numbers. First we had to show that we could reproduce their 1998 result.</p>
+<p>Their calculation used the picture of the universe accepted then. We now know it differently, for example that its expansion is speeding up. So we planned to redo it with current numbers. First we tried to reproduce their 1998 result.</p>
 
 <h2>Simulation 2: can we reproduce the 1998 result?</h2>
 <h3>Step one: from annihilation rate to glow. Passed.</h3>
@@ -126,13 +126,23 @@ BODY = f"""
 <p>We then solved a simplified version of the problem by a separate mathematical route. It agreed with our simulation to within about 7 per cent. This hints that the published rate may be somewhat high in part of its range. It does not prove it: the simplified version leaves out parts of the full problem, and no outside expert has checked our work. The mistake could still be ours.</p>
 <p>We also found two inconsistencies in the paper. Two curves in one figure differ by 37.5 times where its own scaling rule requires 50. Its definition of temperature does not match its formulas. Neither finding by itself overturns its conclusion.</p>
 
-<h2>What we have not done</h2>
+<h2>Simulation 3: even our lowest estimate against telescope data</h2>
+<p>We could not settle which annihilation rate is right. So we asked a safer question: if we always take the lowest rate we have, is the predicted glow still too bright? We wrote down this rule before computing it. It does change our earlier plan, which was to stop until the difference was explained.</p>
+<p>We used current numbers for the universe and compared with measurements from COMPTEL, a gamma-ray telescope. To be fair to the idea, we raised the measured values by their uncertainty and assumed that none of the observed glow comes from anything else. The rule was that more than 3 times too bright means ruled out.</p>
+<div class="scroll"><table>
+<tr><th>Size of each region</th><th>Predicted compared with observed</th><th>Verdict</th></tr>
+<tr><td>20 Mpc (about 65 million light-years)</td><td>2,600 times brighter</td><td>Ruled out</td></tr>
+<tr><td>1,000 Mpc (about 3 billion light-years)</td><td>52 times brighter</td><td>Ruled out</td></tr>
+</table></div>
+<p>The glow came out brighter than in 1998, mainly because we now know there is about three times as much ordinary matter as assumed then.</p>
+<p>The larger size depends on one assumption: that particles flying out of the annihilations heat the gas, which makes it flow into the border faster. With no such heating at all, which we looked at afterwards, the result for the larger size would be undecided.</p>
+
+<h2>What this does not show</h2>
 <ul>
-<li>We have not redone the calculation with current numbers for the universe.</li>
-<li>We have not compared any result of ours with telescope measurements.</li>
-<li>We have not shown that the 1998 conclusion is wrong, or that the idea we are testing is right.</li>
+<li>It rests on one model of how matter and antimatter meet. All our simulations share its assumptions.</li>
+<li>It does not cover regions about as large as everything we can see, small isolated pockets, or any arrangement that keeps matter and antimatter apart.</li>
+<li>No outside expert has checked our work.</li>
 </ul>
-<p>Before running it, we recorded our expectation that current numbers would make the predicted glow brighter. That would count further against the idea. It is a guess until computed.</p>
 
 <h2>Words used here</h2>
 <div class="scroll"><table>
@@ -143,7 +153,7 @@ BODY = f"""
 </table></div>
 
 <footer>
-<p>A project by Praveen Chandrahas. The code and analysis were produced with help from an AI system (Claude) and have not been peer reviewed. Status as of 26 November 2026.</p>
+<p>A project by Praveen Chandrahas. The code and analysis were produced with help from an AI system (Claude) and have not been peer reviewed. Status as of 26 November 2026, evening.</p>
 <p><a href="https://github.com/praveenchandrahas/baryon-asymmetry">Code, data and pass/fail rules</a> · <a href="https://arxiv.org/abs/astro-ph/9707087">The 1998 study</a></p>
 </footer>
 </main>

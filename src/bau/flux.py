@@ -17,10 +17,11 @@ Y_MIN, Y_MAX = 20.0, 1100.0
 CDG_1998 = dict(h=0.75, omega_m=1.0, omega_l=0.0, eta=2e-10)
 
 
-def hubble(y, h, omega_m, omega_l):
-    """H in 1/s (CDG eq. 15; no radiation term)."""
+def hubble(y, h, omega_m, omega_l, omega_r=0.0):
+    """H in 1/s (CDG eq. 15, plus an optional radiation term)."""
     h0 = h * 100 / 3.0857e19
-    return h0 * np.sqrt((1 - omega_m - omega_l) * y**2 + omega_m * y**3 + omega_l)
+    return h0 * np.sqrt((1 - omega_m - omega_l - omega_r) * y**2 + omega_m * y**3
+                        + omega_l + omega_r * y**4)
 
 
 def photon_cross_section(E):
@@ -44,19 +45,19 @@ def cdg_J(y):
 
 
 def flux(E_obs, d0_mpc, spectrum, J=cdg_J, h=0.75, omega_m=1.0, omega_l=0.0,
-         eta=2e-10, n=3000, attenuate=True):
+         eta=2e-10, n=3000, attenuate=True, omega_r=0.0):
     """Photons / (cm^2 s MeV sr) today. J must belong to the same cosmology."""
     E_obs = np.atleast_1d(np.asarray(E_obs, dtype=float))
     ly = np.linspace(0.0, np.log(Y_MAX), n)
     y_all = np.exp(ly)
     y = np.exp(np.linspace(np.log(Y_MIN), np.log(Y_MAX), n))
-    H = hubble(y, h, omega_m, omega_l)
+    H = hubble(y, h, omega_m, omega_l, omega_r)
     source = J(y) * y / (d0_mpc * MPC_CM)          # J / d(y)
     out = []
     for E in E_obs:
         if attenuate:
             g = (C_CM_S * photon_cross_section(E * y_all) * eta * N_GAMMA0
-                 * y_all**3 / hubble(y_all, h, omega_m, omega_l))
+                 * y_all**3 / hubble(y_all, h, omega_m, omega_l, omega_r))
             tau = np.interp(np.log(y), ly, cumulative_trapezoid(g, ly, initial=0))
         else:
             tau = 0.0

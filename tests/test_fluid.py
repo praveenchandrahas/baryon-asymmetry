@@ -58,3 +58,11 @@ def test_expanding_flow_against_similarity_solution():
     coefficient, u_wall = similarity.flux_coefficient(0.5)
     assert u_wall == pytest.approx(-1, abs=0.02)
     assert fluid.expanding_test(0.5) == pytest.approx(coefficient, rel=0.08)
+
+
+def test_radiation_term_defaults_off_and_agrees_between_modules():
+    f = fluid.Flow()
+    assert f.hubble(100.0) == pytest.approx(flux.hubble(100.0, 0.75, 1.0, 0.0))
+    g = fluid.Flow(h=0.6736, omega_m=0.3153, omega_l=0.68, omega_r=9.2e-5)
+    assert g.hubble(1000.0) == pytest.approx(
+        flux.hubble(1000.0, 0.6736, 0.3153, 0.68, 9.2e-5))

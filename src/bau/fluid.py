@@ -27,9 +27,10 @@ class Flow:
                  a_ev_mpc=10.0, heating=True, drag=True, compton=True,
                  expansion=True, cells=150, x_first=3e18, x_max=1e24,
                  viscosity=1.0, heat_profile="local", boundary_speed=1.0,
-                 hubble_drag=True, relax_rate=0.0, relax_T=1.0):
+                 hubble_drag=True, relax_rate=0.0, relax_T=1.0, omega_r=0.0):
         self.kappa, self.n0 = kappa, eta * N_GAMMA0
         self.h, self.om, self.ol = h, omega_m, omega_l
+        self.orad = omega_r
         self.a = a_ev_mpc if heating else 0.0
         self.drag, self.compton, self.expansion = drag, compton, expansion
         self.viscosity = viscosity
@@ -55,7 +56,8 @@ class Flow:
 
     def hubble(self, y):
         h0 = self.h * 100 / 3.0857e19
-        return h0 * np.sqrt((1 - self.om - self.ol) * y**2 + self.om * y**3 + self.ol)
+        return h0 * np.sqrt((1 - self.om - self.ol - self.orad) * y**2
+                            + self.om * y**3 + self.ol + self.orad * y**4)
 
     def sound_speed(self, T):
         return C * np.sqrt(5 / 3 * self.kappa * np.maximum(T, 1e-8) / M_P)
