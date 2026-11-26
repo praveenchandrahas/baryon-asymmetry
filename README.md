@@ -27,6 +27,7 @@ With current cosmology, even the lowest gamma-ray flux from our runs is 52 times
 above the data for 1000 Mpc domains, so **domains up to that size are excluded**
 within the Cohen–De Rújula–Glashow model. This counts against the hypothesis.
 See [docs/conservative-result.md](docs/conservative-result.md) and its limits.
+Open questions and untested speculations: [docs/discussion-notes.md](docs/discussion-notes.md).
 
 ## First target
 
